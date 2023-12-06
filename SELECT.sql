@@ -30,3 +30,12 @@ WHERE Price BETWEEN 50 AND 60;
 -- %s% -> Cities include s
 SELECT * FROM Customers
 WHERE City LIKE 's%';
+
+-- Select all customers from Spain that starts with a "G", 
+-- plus all customers that starts with an "R", regardless of the country value:
+SELECT * FROM Customers
+WHERE Country = 'Spain' AND CustomerName LIKE 'G%' OR CustomerName LIKE 'R%';
+
+-- Not
+SELECT * FROM Customers
+WHERE CustomerID NOT BETWEEN 10 AND 60;
