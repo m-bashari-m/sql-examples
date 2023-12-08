@@ -39,3 +39,13 @@ WHERE Country = 'Spain' AND CustomerName LIKE 'G%' OR CustomerName LIKE 'R%';
 -- Not
 SELECT * FROM Customers
 WHERE CustomerID NOT BETWEEN 10 AND 60;
+
+-- Select top
+ SELECT TOP 50 PERCENT * FROM Customers; 
+
+SELECT * FROM Customers
+LIMIT 3;
+
+-- Order the return top 3
+SELECT TOP 3 * FROM Customers
+ORDER BY CustomerName DESC;
