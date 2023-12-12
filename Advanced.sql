@@ -35,3 +35,50 @@ HAVING COUNT(Orders.OrderID) > 25;
 SELECT SupplierName
 FROM Suppliers
 WHERE EXISTS (SELECT ProductName FROM Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);
+
+-- Returns a boolean value as a result
+-- Returns TRUE if ANY of the subquery values meet the condition
+
+-- Lists the ProductName if it finds ANY records in the OrderDetails table has Quantity equal to 10
+SELECT ProductName
+FROM Products
+WHERE ProductID = ANY
+  (SELECT ProductID
+  FROM OrderDetails
+  WHERE Quantity = 10);
+
+-- Returns a boolean value as a result
+-- Returns TRUE if ALL of the subquery values meet the condition
+
+-- lists the ProductName if ALL the records in the OrderDetails table has Quantity equal to 10
+SELECT ProductName
+FROM Products
+WHERE ProductID = ALL
+  (SELECT ProductID
+  FROM OrderDetails
+  WHERE Quantity = 10);
+
+-- The SELECT INTO statement copies data from one table into a new table.
+
+-- Creates a backup copy of Customers
+SELECT * INTO CustomersBackup2017
+FROM Customers;
+
+-- Uses the IN clause to copy the table into a new table in another database
+SELECT * INTO CustomersBackup2017 IN 'Backup.mdb'
+FROM Customers;
+
+-- Copies only a few columns into a new table
+SELECT CustomerName, ContactName INTO CustomersBackup2017
+FROM Customers;
+
+-- Copies data from more than one table into a new table
+SELECT Customers.CustomerName, Orders.OrderID
+INTO CustomersOrderBackup2017
+FROM Customers
+LEFT JOIN Orders ON Customers.CustomerID = Orders.CustomerID;
+
+-- Create a new, empty table using the schema of another
+SELECT * INTO newtable
+FROM oldtable
+WHERE 1 = 0;
